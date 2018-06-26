@@ -1,12 +1,40 @@
-<table class="table table-sm table-hover">
+<!--<table class="table table-sm table-hover">
   <tr *ngFor="let employee of employeeService.employeeList">
     <td>{{employee.FirstName}}- {{employee.LastName}}</td>
     <td>{{employee.EmpCode}}</td>
     <td >
       <a class="btn text" (click)="ShowForEdit(employee)"><i class="fas fa-pencil-alt"></i></a>
-    
+
       <a class="btn text-danger" (click)="DeleteEmployee(employee.EmployeeID)"><i class="far fa-trash-alt"></i></a>
     </td>
   </tr>
 
-</table>
+</table>-->
+
+<input type='text'
+       style='padding:8px;margin:15px auto;width:100%;'
+       placeholder='Type to filter the name column...'
+       (keyup)='updateFilter($event)' />
+
+<ngx-datatable #table
+               class="material"
+               [rows]="employeeService.employeeList"
+               [columnMode]="'force'"
+               [headerHeight]="50"
+               [footerHeight]="50"
+               [rowHeight]="'auto'"
+               [limit]="2">
+  <ngx-datatable-column name="First Name" prop="FirstName"></ngx-datatable-column>
+  <ngx-datatable-column name="Last Name" prop="LastName"></ngx-datatable-column>
+
+  <ngx-datatable-column name="Emp Code" prop="EmpCode"></ngx-datatable-column>
+
+  <ngx-datatable-column name="ACTIONS" prop="EmployeeID" [sortable]="false">
+    <ng-template let-EmployeeID="value" ngx-datatable-cell-template>
+      <a class="btn text" (click)="ShowForEdit(EmployeeID)"><i class="fas fa-pencil-alt"></i></a>
+      <a class="btn text-danger" (click)="DeleteEmployee(EmployeeID)"><i class="far fa-trash-alt"></i></a>
+    </ng-template>
+  </ngx-datatable-column>
+
+</ngx-datatable>
+

@@ -8,18 +8,19 @@ import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { ToastrModule } from 'ngx-toastr'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+//import { DataTablePagerComponent } from './pager.component';
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
     EmployeeComponent,
-    EmployeeListComponent,
-  
+    EmployeeListComponent
+    
   ],
   imports: [
     BrowserModule,
-    FormsModule, HttpModule, BrowserAnimationsModule, ToastrModule.forRoot()
+    FormsModule, HttpModule, BrowserAnimationsModule, ToastrModule.forRoot(), NgxDatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

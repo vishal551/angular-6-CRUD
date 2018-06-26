@@ -15,12 +15,10 @@ import { Promise } from 'q';
   providedIn: 'root'
 })
 export class EmployeeService {
+
   selectedEmployee: Employee;
   employeeList: Employee[];
-
-
   constructor(private http: Http) { }
-
 
 
   postEmployee(emp: any) {
@@ -29,14 +27,19 @@ export class EmployeeService {
     var requestOption = new RequestOptions({ method: RequestMethod.Post, headers: headerOptions });
     return this.http.post('http://localhost:56945/api/Employees', body, requestOption).pipe(tap((res: any) => { return res }),
       catchError(this.handleError));
-
   }
   getEmployee() {
-
     return this.http.get('http://localhost:56945/api/Employees').pipe(tap((res: any) => { return res }), catchError(this.handleError)).subscribe(response => {
       this.employeeList = JSON.parse(response._body);
     });
+  }
+  getEmployeebyID(id: number) {
 
+    return this.http.get('http://localhost:56945/api/GetEmployeesbyID?id=' + id).pipe(tap((res: any) => { return res }), catchError(this.handleError)).subscribe(response => {
+
+      debugger;
+      this.selectedEmployee = JSON.parse(response._body);
+    });
   }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
